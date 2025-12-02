@@ -85,8 +85,6 @@ export default defineConfig((/* ctx */) => {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#framework
     framework: {
-      config: {},
-
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
 
@@ -98,7 +96,25 @@ export default defineConfig((/* ctx */) => {
       // directives: [],
 
       // Quasar plugins
-      plugins: [],
+      plugins: ['Notify', 'LocalStorage', 'SessionStorage', 'Dialog', 'Loading', 'LoadingBar'],
+      config: {
+        notify: {
+          position: 'bottom',
+        },
+        loading: {
+          spinner: 'QSpinnerOval',
+          messageColor: 'amber',
+          spinnerColor: 'amber',
+          delay: 100, // ms,
+        },
+        loadingBar: {
+          color: 'secondary',
+          size: '3px',
+        },
+        capacitor: {
+          iosStatusBarPadding: true,
+        },
+      },
     },
 
     // animations: 'all', // --- includes all animations
