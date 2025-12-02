@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { api } from '../boot/axios';
 import type { GenericResponseData } from 'src/models/GenericResponseData';
+import handleError from 'src/utils/handleError';
 
 interface PerDayResponse {
   perDay: number;
@@ -27,8 +28,7 @@ export const useSpreadSheetStore = defineStore('spreadSheet', {
         });
         return responseData;
       } catch (error: any) {
-        const errorMessage = error.response.data.message;
-        throw new Error(errorMessage);
+        handleError(error);
       }
     },
   },

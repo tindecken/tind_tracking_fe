@@ -57,8 +57,9 @@ import { useQuasar } from 'quasar';
 
 const $q = useQuasar();
 const spreadSheetStore = useSpreadSheetStore();
+const currentDate = new Date();
 const form = ref({
-  day: null as number | null,
+  day: currentDate.getDate(),
   note: '',
   price: null as number | null,
   isNhi: false,
