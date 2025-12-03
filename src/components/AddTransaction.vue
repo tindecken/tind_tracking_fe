@@ -15,7 +15,7 @@
     <q-input
       v-model.number="form.price"
       type="number"
-      label="Price"
+      label="Amount"
       :rules="[(val) => (val !== null && val !== '') || 'Required']"
     >
       <template v-slot:prepend>
