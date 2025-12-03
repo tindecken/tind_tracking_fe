@@ -11,7 +11,6 @@
       <q-tab-panels v-model="tab" animated>
         <q-tab-panel name="summary">
           <div class="text-h6">Summary</div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </q-tab-panel>
 
         <q-tab-panel name="addTransaction">
