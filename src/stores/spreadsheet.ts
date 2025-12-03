@@ -6,6 +6,7 @@ import type { PerDayResponse } from 'src/models/PerDayResponse';
 import type { AddTransactionRequestModel } from 'src/models/AddTransactionRequestModel';
 import type { AddTransactionResponse } from 'src/models/AddTransactionResponse';
 import type { GetMustPayResponse } from 'src/models/GetMustPayResponse';
+import type { GetNhiRemainingResponse } from 'src/models/GetNhiRemainingResponse';
 
 export const useSpreadSheetStore = defineStore('spreadSheet', {
   state: () => {
@@ -26,6 +27,22 @@ export const useSpreadSheetStore = defineStore('spreadSheet', {
         console.log('responseData', responseData);
         this.$patch({
           perDay: responseData?.data?.perDay,
+        });
+        return responseData;
+      } catch (error: any) {
+        handleError(error);
+      }
+    },
+    async getNhiRemaining(): Promise<GenericResponseData<GetNhiRemainingResponse> | undefined> {
+      try {
+        const axiosResponse = await api.get('/spreadsheet/nhiRemaining', {
+          withCredentials: true,
+        });
+        const responseData =
+          (await axiosResponse.data) as GenericResponseData<GetNhiRemainingResponse>;
+        console.log('responseData', responseData);
+        this.$patch({
+          nhiRemaining: responseData?.data?.nhiRemaining,
         });
         return responseData;
       } catch (error: any) {

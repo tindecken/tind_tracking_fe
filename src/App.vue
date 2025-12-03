@@ -11,7 +11,11 @@ const spreadsheetStore = useSpreadSheetStore();
 onMounted(async () => {
   try {
     // Fetch both data in parallel
-    await Promise.all([spreadsheetStore.getMustPay(), spreadsheetStore.getPerDay()]);
+    await Promise.all([
+      spreadsheetStore.getMustPay(),
+      spreadsheetStore.getPerDay(),
+      spreadsheetStore.getNhiRemaining(),
+    ]);
   } catch (error) {
     console.error('Failed to fetch initial data:', error);
   }
