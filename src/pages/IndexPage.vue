@@ -8,13 +8,13 @@
       </q-tabs>
       <q-separator />
       <q-tab-panels v-model="tab" animated>
-        <q-tab-panel name="summary">
+        <q-tab-panel name="summary" class="q-pl-none q-pr-none">
           <q-card class="q-pa-md">
             <summary-report></summary-report>
           </q-card>
         </q-tab-panel>
 
-        <q-tab-panel name="addTransaction">
+        <q-tab-panel name="addTransaction" class="q-pl-none q-pr-none">
           <div class="q-gutter-sm q-mb-sm">
             <q-radio v-model="radio" val="default" label="Default" />
             <q-radio v-model="radio" val="mustPay" label="For Must Pay" />
@@ -26,7 +26,7 @@
             <add-transaction-for-mustpay></add-transaction-for-mustpay>
           </q-card>
         </q-tab-panel>
-        <q-tab-panel name="transactions">
+        <q-tab-panel name="transactions" class="q-pl-none q-pr-none">
           <transaction-list></transaction-list>
         </q-tab-panel>
       </q-tab-panels>

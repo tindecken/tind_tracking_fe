@@ -5,7 +5,7 @@
     row-key="cellAddress"
     :pagination="pagination"
     :loading="loading"
-    class="q-mt-md"
+    class="q-mt-md transaction-table"
     title="Transactions"
     flat
     bordered
@@ -38,8 +38,10 @@ const columns: QTableColumn[] = [
     align: 'left',
     field: 'date',
     sortable: true,
-    style: 'width: 50px;',
-    headerStyle: 'width: 50px;',
+    style: 'max-width: 80px;',
+    headerStyle: 'max-width: 80px;',
+    classes: 'date-column',
+    headerClasses: 'date-column',
   },
   {
     name: 'note',
@@ -88,5 +90,27 @@ onMounted(async () => {
 <style scoped>
 .hidden-column {
   display: none;
+}
+
+.transaction-table :deep(.q-table__top) {
+  padding: 8px 16px;
+}
+
+.transaction-table :deep(.q-table__title) {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.transaction-table :deep(.date-column) {
+  max-width: 80px;
+  width: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.transaction-table :deep(.q-table__card) {
+  box-shadow: none;
+  border: 1px solid #e0e0e0;
 }
 </style>
