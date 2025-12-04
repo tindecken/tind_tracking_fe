@@ -1,5 +1,6 @@
 <template>
   <q-table
+    title="Summary"
     :rows="summaryData"
     :columns="summaryColumns"
     :pagination="{ rowsPerPage: 0 }"
