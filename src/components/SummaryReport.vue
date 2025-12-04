@@ -1,14 +1,23 @@
 <template>
-  <div class="row justify-between q-mb-md">
-    <div class="text-h6">ATM: {{ atm }}</div>
-    <div class="text-h6">Cash: {{ cash }}</div>
-    <div class="text-h6">Day Left: {{ dayLeft }}</div>
-  </div>
-  <div class="row justify-between">
-    <div class="text-h6">Perday: {{ perDay }}</div>
-    <div class="text-h6">Nhi: {{ nhiRemaining }}</div>
-  </div>
   <q-table
+    :rows="summaryData"
+    :columns="summaryColumns"
+    :pagination="{ rowsPerPage: 0 }"
+    hide-pagination
+    hide-header
+    flat
+    bordered
+    class="q-mb-md"
+    :rows-per-page-options="[0]"
+  >
+    <template v-slot:body-cell-value="props">
+      <q-td :props="props" class="text-right">
+        {{ props.value }}
+      </q-td>
+    </template>
+  </q-table>
+  <q-table
+    title="Must Pay"
     :rows="listMustPay"
     :columns="columns"
     row-key="cell"
@@ -23,13 +32,23 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useSpreadSheetStore } from 'src/stores/spreadsheet';
+import type { QTableColumn } from 'quasar';
+
 const spreadSheetStore = useSpreadSheetStore();
 
-const perDay = computed(() => spreadSheetStore.perDay);
-const nhiRemaining = computed(() => spreadSheetStore.nhiRemaining);
-const cash = computed(() => spreadSheetStore.cash);
-const atm = computed(() => spreadSheetStore.atm);
-const dayLeft = computed(() => spreadSheetStore.dayLeft);
+const summaryColumns: QTableColumn[] = [
+  { name: 'label', label: 'Label', field: 'label', align: 'left' as const },
+  { name: 'value', label: 'Value', field: 'value', align: 'right' as const },
+];
+
+const summaryData = computed(() => [
+  { label: 'ATM', value: spreadSheetStore.atm },
+  { label: 'Cash', value: spreadSheetStore.cash },
+  { label: 'Day Left', value: spreadSheetStore.dayLeft },
+  { label: 'Per Day', value: spreadSheetStore.perDay },
+  { label: 'Nhi', value: spreadSheetStore.nhiRemaining },
+]);
+
 const listMustPay = computed(() => spreadSheetStore.listMustPay);
 
 const columns = [
