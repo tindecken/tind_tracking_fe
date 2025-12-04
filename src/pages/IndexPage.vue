@@ -27,8 +27,7 @@
           </q-card>
         </q-tab-panel>
         <q-tab-panel name="transactions">
-          <div class="text-h6">Transactions</div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          <transaction-list></transaction-list>
         </q-tab-panel>
       </q-tab-panels>
     </div>
@@ -40,6 +39,7 @@ import { ref } from 'vue';
 import AddTransaction from 'src/components/AddTransaction.vue';
 import AddTransactionForMustpay from 'src/components/AddTransactionForMustpay.vue';
 import SummaryReport from 'src/components/SummaryReport.vue';
+import TransactionList from 'src/components/TransactionList.vue';
 
 const tab = ref('summary');
 const radio = ref('default');

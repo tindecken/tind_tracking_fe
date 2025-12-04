@@ -8,6 +8,7 @@ import type { AddTransactionResponse } from 'src/models/AddTransactionResponse';
 import type { GetMustPayResponse } from 'src/models/GetMustPayResponse';
 import type { GetNhiRemainingResponse } from 'src/models/GetNhiRemainingResponse';
 import type { GetHoangRemainingResponse } from 'src/models/GetHoangRemainingResponse';
+import type { TransactionModel } from 'src/models/TransactionModel';
 
 export const useSpreadSheetStore = defineStore('spreadSheet', {
   state: () => {
@@ -18,6 +19,7 @@ export const useSpreadSheetStore = defineStore('spreadSheet', {
       nhiRemaining: 0,
       perDay: 0,
       listMustPay: [] as GetMustPayResponse,
+      listTransactions: [] as TransactionModel[],
     };
   },
   getters: {},
@@ -102,13 +104,13 @@ export const useSpreadSheetStore = defineStore('spreadSheet', {
         handleError(error);
       }
     },
-    async getAllTransactions(): Promise<GenericResponseData<GetMustPayResponse> | undefined> {
+    async getAllTransactions(): Promise<GenericResponseData<TransactionModel[]> | undefined> {
       try {
-        const axiosResponse = await api.get('/spreadsheet/getAllTransactions');
-        const responseData = (await axiosResponse.data) as GenericResponseData<GetMustPayResponse>;
+        const axiosResponse = await api.get('/spreadsheet/allTransactions');
+        const responseData = (await axiosResponse.data) as GenericResponseData<TransactionModel[]>;
         console.log('responseData', responseData);
         this.$patch({
-          listMustPay: responseData?.data,
+          listTransactions: responseData?.data,
         });
         return responseData;
       } catch (error: any) {
