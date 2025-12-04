@@ -50,8 +50,9 @@ const columns: QTableColumn[] = [
     align: 'left' as const,
     field: 'note',
     sortable: true,
-    style: 'width: 150px;',
-    headerStyle: 'width: 150px;',
+    style: 'max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;',
+    headerStyle: 'max-width: 180px;',
+    classes: 'note-column',
   },
   {
     name: 'price',
@@ -104,6 +105,13 @@ onMounted(async () => {
 .transaction-table :deep(.date-column) {
   max-width: 80px;
   width: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.transaction-table :deep(.note-column) {
+  max-width: 180px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
