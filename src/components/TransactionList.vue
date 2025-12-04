@@ -6,7 +6,7 @@
     :pagination="pagination"
     :loading="loading"
     class="q-mt-md transaction-table"
-    title="Transactions"
+    :title="'Total Amount: ' + totalTransactionAmount"
     flat
     bordered
   >
@@ -57,7 +57,7 @@ const columns: QTableColumn[] = [
   },
   {
     name: 'price',
-    label: 'Price',
+    label: 'Amount',
     field: 'price',
     align: 'right' as const,
     classes: 'q-padding',
@@ -80,6 +80,7 @@ const pagination = {
 };
 
 const listTransactions = computed(() => spreadSheetStore.listTransactions);
+const totalTransactionAmount = computed(() => spreadSheetStore.totalTransactionAmount);
 
 onMounted(async () => {
   loading.value = true;
