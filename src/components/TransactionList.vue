@@ -38,6 +38,8 @@ const columns: QTableColumn[] = [
     align: 'left',
     field: 'date',
     sortable: true,
+    style: 'width: 50px;',
+    headerStyle: 'width: 50px;',
   },
   {
     name: 'note',
@@ -46,6 +48,8 @@ const columns: QTableColumn[] = [
     align: 'left' as const,
     field: 'note',
     sortable: true,
+    style: 'width: 150px;',
+    headerStyle: 'width: 150px;',
   },
   {
     name: 'price',
