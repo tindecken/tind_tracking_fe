@@ -11,10 +11,9 @@
     />
 
     <q-select
-      filled
       v-model="mustPay"
       :options="options"
-      label="Standard"
+      label="Must Pay"
       option-label="name"
       option-value="cell"
     />

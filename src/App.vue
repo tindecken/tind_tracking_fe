@@ -15,6 +15,7 @@ onMounted(async () => {
       spreadsheetStore.getMustPay(),
       spreadsheetStore.getPerDay(),
       spreadsheetStore.getNhiRemaining(),
+      spreadsheetStore.getHoangRemaining(),
     ]);
   } catch (error) {
     console.error('Failed to fetch initial data:', error);

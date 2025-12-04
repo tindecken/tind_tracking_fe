@@ -7,10 +7,13 @@ import type { AddTransactionRequestModel } from 'src/models/AddTransactionReques
 import type { AddTransactionResponse } from 'src/models/AddTransactionResponse';
 import type { GetMustPayResponse } from 'src/models/GetMustPayResponse';
 import type { GetNhiRemainingResponse } from 'src/models/GetNhiRemainingResponse';
+import type { GetHoangRemainingResponse } from 'src/models/GetHoangRemainingResponse';
 
 export const useSpreadSheetStore = defineStore('spreadSheet', {
   state: () => {
     return {
+      atm: 0,
+      cash: 0,
       nhiRemaining: 0,
       perDay: 0,
       listMustPay: [] as GetMustPayResponse,
@@ -43,6 +46,23 @@ export const useSpreadSheetStore = defineStore('spreadSheet', {
         console.log('responseData', responseData);
         this.$patch({
           nhiRemaining: responseData?.data?.nhiRemaining,
+        });
+        return responseData;
+      } catch (error: any) {
+        handleError(error);
+      }
+    },
+    async getHoangRemaining(): Promise<GenericResponseData<GetHoangRemainingResponse> | undefined> {
+      try {
+        const axiosResponse = await api.get('/spreadsheet/hoangRemaining', {
+          withCredentials: true,
+        });
+        const responseData =
+          (await axiosResponse.data) as GenericResponseData<GetHoangRemainingResponse>;
+        console.log('responseData', responseData);
+        this.$patch({
+          atm: responseData?.data?.atm,
+          cash: responseData?.data?.cash,
         });
         return responseData;
       } catch (error: any) {

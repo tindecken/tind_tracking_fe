@@ -10,7 +10,9 @@
       <q-separator />
       <q-tab-panels v-model="tab" animated>
         <q-tab-panel name="summary">
-          <div class="text-h6">Summary</div>
+          <q-card class="q-pa-md">
+            <summary-report></summary-report>
+          </q-card>
         </q-tab-panel>
 
         <q-tab-panel name="addTransaction">
@@ -43,6 +45,7 @@
 import { ref } from 'vue';
 import AddTransaction from 'src/components/AddTransaction.vue';
 import AddTransactionForMustpay from 'src/components/AddTransactionForMustpay.vue';
+import SummaryReport from 'src/components/SummaryReport.vue';
 
 const tab = ref('summary');
 const radio = ref('default');
