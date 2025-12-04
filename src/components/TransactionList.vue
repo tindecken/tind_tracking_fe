@@ -34,12 +34,12 @@ const columns: QTableColumn[] = [
   {
     name: 'date',
     required: true,
-    label: 'Date',
+    label: 'D',
     align: 'left',
     field: 'date',
     sortable: true,
-    style: 'max-width: 80px;',
-    headerStyle: 'max-width: 80px;',
+    style: 'max-width: 50px;',
+    headerStyle: 'max-width: 50px;',
     classes: 'date-column',
     headerClasses: 'date-column',
   },
@@ -103,7 +103,7 @@ onMounted(async () => {
 }
 
 .transaction-table :deep(.date-column) {
-  max-width: 80px;
+  max-width: 50px;
   width: 50px;
   white-space: nowrap;
   overflow: hidden;
