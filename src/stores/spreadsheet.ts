@@ -14,6 +14,7 @@ export const useSpreadSheetStore = defineStore('spreadSheet', {
     return {
       atm: 0,
       cash: 0,
+      dayLeft: 0,
       nhiRemaining: 0,
       perDay: 0,
       listMustPay: [] as GetMustPayResponse,
@@ -63,6 +64,7 @@ export const useSpreadSheetStore = defineStore('spreadSheet', {
         this.$patch({
           atm: responseData?.data?.atm,
           cash: responseData?.data?.cash,
+          dayLeft: responseData?.data?.dayLeft,
         });
         return responseData;
       } catch (error: any) {
@@ -90,6 +92,19 @@ export const useSpreadSheetStore = defineStore('spreadSheet', {
         const axiosResponse = await api.get('/spreadsheet/getMustPay', {
           withCredentials: true,
         });
+        const responseData = (await axiosResponse.data) as GenericResponseData<GetMustPayResponse>;
+        console.log('responseData', responseData);
+        this.$patch({
+          listMustPay: responseData?.data,
+        });
+        return responseData;
+      } catch (error: any) {
+        handleError(error);
+      }
+    },
+    async getAllTransactions(): Promise<GenericResponseData<GetMustPayResponse> | undefined> {
+      try {
+        const axiosResponse = await api.get('/spreadsheet/getAllTransactions');
         const responseData = (await axiosResponse.data) as GenericResponseData<GetMustPayResponse>;
         console.log('responseData', responseData);
         this.$patch({

@@ -10,13 +10,18 @@
       ]"
     />
 
-    <q-select
-      v-model="mustPay"
-      :options="options"
-      label="Must Pay"
-      option-label="name"
-      option-value="cell"
-    />
+    <q-select v-model="mustPay" :options="options" label="Must Pay" option-value="cell">
+      <template v-slot:option="scope">
+        <q-item v-bind="scope.itemProps">
+          <q-item-section>
+            <q-item-label>{{ scope.opt.name }} - {{ scope.opt.amount }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </template>
+      <template v-slot:selected-item="scope">
+        <span>{{ scope.opt.name }} - {{ scope.opt.amount }}</span>
+      </template>
+    </q-select>
 
     <q-input
       v-model.number="form.amount"

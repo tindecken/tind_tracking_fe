@@ -4,7 +4,6 @@
       <q-tabs v-model="tab" no-caps class="shadow-2">
         <q-tab name="summary" label="Summary" />
         <q-tab name="addTransaction" label="Add Transaction" />
-        <q-tab name="mustPay" label="Must Pay" />
         <q-tab name="transactions" label="Transactions" />
       </q-tabs>
       <q-separator />
@@ -26,11 +25,6 @@
           <q-card v-if="radio === 'mustPay'" class="q-pa-md">
             <add-transaction-for-mustpay></add-transaction-for-mustpay>
           </q-card>
-        </q-tab-panel>
-
-        <q-tab-panel name="mustPay">
-          <div class="text-h6">Must Pay</div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </q-tab-panel>
         <q-tab-panel name="transactions">
           <div class="text-h6">Transactions</div>
