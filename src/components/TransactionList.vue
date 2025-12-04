@@ -40,8 +40,8 @@ const columns: QTableColumn[] = [
     sortable: true,
     style: 'max-width: 50px;',
     headerStyle: 'max-width: 50px;',
-    classes: 'date-column',
-    headerClasses: 'date-column',
+    classes: 'date-column q-padding',
+    headerClasses: 'date-column q-padding',
   },
   {
     name: 'note',
@@ -52,13 +52,16 @@ const columns: QTableColumn[] = [
     sortable: true,
     style: 'max-width: 165px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;',
     headerStyle: 'max-width: 165px;',
-    classes: 'note-column',
+    classes: 'note-column q-padding',
+    headerClasses: 'q-padding',
   },
   {
     name: 'price',
     label: 'Price',
     field: 'price',
     align: 'right' as const,
+    classes: 'q-padding',
+    headerClasses: 'q-padding',
     sortable: true,
   },
   {
@@ -67,6 +70,8 @@ const columns: QTableColumn[] = [
     field: 'isCashed',
     align: 'center' as const,
     sortable: true,
+    classes: 'q-padding',
+    headerClasses: 'q-padding',
   },
 ];
 
@@ -120,5 +125,9 @@ onMounted(async () => {
 .transaction-table :deep(.q-table__card) {
   box-shadow: none;
   border: 1px solid #e0e0e0;
+}
+.transaction-table :deep(.q-padding) {
+  padding-left: 8px;
+  padding-right: 8px;
 }
 </style>
