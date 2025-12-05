@@ -10,6 +10,7 @@
     bordered
     class="q-mb-md"
     :rows-per-page-options="[0]"
+    dense
   >
     <template v-slot:body-cell-value="props">
       <q-td :props="props" class="text-right">
@@ -25,8 +26,10 @@
     flat
     bordered
     class="q-mt-md"
-    :rows-per-page-options="[20]"
-    :pagination="{ rowsPerPage: 20 }"
+    hide-pagination
+    hide-header
+    :rows-per-page-options="[0]"
+    dense
   />
 </template>
 
