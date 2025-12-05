@@ -1,36 +1,56 @@
 <template>
-  <q-table
-    title="Summary"
-    :rows="summaryData"
-    :columns="summaryColumns"
-    :pagination="{ rowsPerPage: 0 }"
-    hide-pagination
-    hide-header
-    flat
-    bordered
-    class="q-mb-md"
-    :rows-per-page-options="[0]"
-    dense
-  >
-    <template v-slot:body-cell-value="props">
-      <q-td :props="props" class="text-right">
-        {{ props.value }}
-      </q-td>
-    </template>
-  </q-table>
-  <q-table
-    title="Must Pay"
-    :rows="listMustPay"
-    :columns="columns"
-    row-key="cell"
-    flat
-    bordered
-    class="q-mt-md"
-    hide-pagination
-    hide-header
-    :rows-per-page-options="[0]"
-    dense
-  />
+  <div class="row q-col-gutter-md">
+    <div class="col-auto">
+      <q-table
+        title="Summary"
+        :rows="summaryData"
+        :columns="summaryColumns"
+        :pagination="{ rowsPerPage: 0 }"
+        hide-pagination
+        hide-header
+        hide-no-data
+        flat
+        bordered
+        :rows-per-page-options="[0]"
+        style="width: 200px"
+      >
+        <template v-slot:body="props">
+          <q-tr
+            :props="props"
+            :class="{ 'bg-grey-2': props.rowIndex % 2 === 0, 'bg-white': props.rowIndex % 2 !== 0 }"
+          >
+            <q-td>{{ props.row.label }}</q-td>
+            <q-td class="text-right">{{ props.row.value }}</q-td>
+          </q-tr>
+        </template>
+      </q-table>
+    </div>
+    <div class="col-auto">
+      <q-table
+        title="Must Pay"
+        :rows="listMustPay"
+        :columns="columns"
+        row-key="cell"
+        flat
+        bordered
+        hide-pagination
+        hide-header
+        hide-no-data
+        :rows-per-page-options="[0]"
+        style="width: 200px"
+      >
+        <template v-slot:body="props">
+          <q-tr
+            :props="props"
+            :class="{ 'bg-grey-2': props.rowIndex % 2 === 0, 'bg-white': props.rowIndex % 2 !== 0 }"
+          >
+            <q-td>{{ props.row.name }}</q-td>
+            <q-td class="text-right">{{ props.row.amount }}</q-td>
+          </q-tr>
+        </template>
+      </q-table>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
