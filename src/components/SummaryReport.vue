@@ -58,6 +58,14 @@ import { computed } from 'vue';
 import { useSpreadSheetStore } from 'src/stores/spreadsheet';
 import type { QTableColumn } from 'quasar';
 
+const formatNumber = (value: number | string): string => {
+  const num = typeof value === 'string' ? parseFloat(value) : value;
+  return new Intl.NumberFormat('de-DE', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(num);
+};
+
 const spreadSheetStore = useSpreadSheetStore();
 
 const summaryColumns: QTableColumn[] = [
@@ -66,14 +74,19 @@ const summaryColumns: QTableColumn[] = [
 ];
 
 const summaryData = computed(() => [
-  { label: 'ATM', value: spreadSheetStore.atm },
-  { label: 'Cash', value: spreadSheetStore.cash },
+  { label: 'ATM', value: formatNumber(spreadSheetStore.atm) },
+  { label: 'Cash', value: formatNumber(spreadSheetStore.cash) },
   { label: 'Day Left', value: spreadSheetStore.dayLeft },
-  { label: 'Per Day', value: spreadSheetStore.perDay },
-  { label: 'Nhi', value: spreadSheetStore.nhiRemaining },
+  { label: 'Per Day', value: formatNumber(spreadSheetStore.perDay) },
+  { label: 'Nhi', value: formatNumber(spreadSheetStore.nhiRemaining) },
 ]);
 
-const listMustPay = computed(() => spreadSheetStore.listMustPay);
+const listMustPay = computed(() => {
+  return spreadSheetStore.listMustPay.map((item) => ({
+    ...item,
+    amount: formatNumber(item.amount),
+  }));
+});
 
 const columns = [
   {
