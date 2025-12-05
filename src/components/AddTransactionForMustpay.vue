@@ -71,6 +71,7 @@ const onSubmit = () => {
     const requestModel: AddTransactionForMustPayRequestModel = {
       day: form.value.day.toString(),
       amount: Number(form.value.amount),
+      isPaybyCash: form.value.isPayByCash,
       mustPay: {
         name: mustPay.value!.name,
         amount: Number(mustPay.value!.amount),
