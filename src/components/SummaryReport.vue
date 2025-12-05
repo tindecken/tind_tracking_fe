@@ -1,5 +1,5 @@
 <template>
-  <div class="row q-col-gutter-md">
+  <div class="row q-col-gutter-sm">
     <div class="col-auto">
       <q-table
         title="Summary"
@@ -12,7 +12,7 @@
         flat
         bordered
         :rows-per-page-options="[0]"
-        style="width: 200px"
+        style="width: 150px"
       >
         <template v-slot:body="props">
           <q-tr
@@ -37,7 +37,7 @@
         hide-header
         hide-no-data
         :rows-per-page-options="[0]"
-        style="width: 200px"
+        style="width: 150px"
       >
         <template v-slot:body="props">
           <q-tr
