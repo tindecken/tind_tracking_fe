@@ -6,7 +6,7 @@
     :pagination="pagination"
     :loading="loading"
     class="q-mt-md transaction-table"
-    :title="'Spent: ' + totalTransactionAmount"
+    :title="'Spent: ' + formatNumber(totalTransactionAmount)"
     flat
     bordered
   >
@@ -79,7 +79,20 @@ const pagination = {
   rowsPerPage: 0, // 0 means show all rows
 };
 
-const listTransactions = computed(() => spreadSheetStore.listTransactions);
+const formatNumber = (value: number | string): string => {
+  const num = typeof value === 'string' ? parseFloat(value) : value;
+  return new Intl.NumberFormat('de-DE', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(num);
+};
+
+const listTransactions = computed(() => {
+  return spreadSheetStore.listTransactions.map((transaction) => ({
+    ...transaction,
+    price: formatNumber(transaction.price),
+  }));
+});
 const totalTransactionAmount = computed(() => spreadSheetStore.totalTransactionAmount);
 
 onMounted(async () => {
