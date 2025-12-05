@@ -6,7 +6,7 @@
     :pagination="pagination"
     :loading="loading"
     class="q-mt-md transaction-table"
-    :title="'Total Amount: ' + totalTransactionAmount"
+    :title="'Spent: ' + totalTransactionAmount"
     flat
     bordered
   >
