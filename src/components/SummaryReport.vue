@@ -12,7 +12,7 @@
         flat
         bordered
         :rows-per-page-options="[0]"
-        style="width: 150px"
+        style="width: 160px"
       >
         <template v-slot:body="props">
           <q-tr
@@ -37,7 +37,7 @@
         hide-header
         hide-no-data
         :rows-per-page-options="[0]"
-        style="width: 150px"
+        style="width: 160px"
       >
         <template v-slot:body="props">
           <q-tr
