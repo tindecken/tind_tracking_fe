@@ -29,7 +29,14 @@
     </div>
 
     <div class="q-mt-lg">
-      <q-btn label="Add" type="submit" color="primary" class="full-width" :disable="!formValid" />
+      <q-btn
+        label="Add"
+        type="submit"
+        color="primary"
+        class="full-width"
+        :disable="!formValid || isSubmitting"
+        :loading="isSubmitting"
+      />
     </div>
   </q-form>
 </template>
@@ -52,12 +59,15 @@ const form = ref({
 });
 const tab = ref('summary');
 const radio = ref('default');
+const isSubmitting = ref(false);
 
 const formValid = computed(() => {
   return form.value.day !== null && form.value.note.trim() !== '' && form.value.price !== null;
 });
 
 const onSubmit = async () => {
+  if (isSubmitting.value) return;
+  isSubmitting.value = true;
   try {
     const requestModel: AddTransactionRequestModel = {
       day: form.value.day.toString(),
@@ -72,6 +82,13 @@ const onSubmit = async () => {
       type: 'positive',
       message: 'Add transaction successfully!',
     });
+    form.value = {
+      day: new Date().getDate(),
+      note: '',
+      price: null,
+      isCountForNhi: false,
+      isPayByCash: false,
+    };
   } catch (err: unknown) {
     const errorMessage =
       err instanceof Error
@@ -84,6 +101,8 @@ const onSubmit = async () => {
       type: 'negative',
       message: errorMessage,
     });
+  } finally {
+    isSubmitting.value = false;
   }
 };
 </script>

@@ -14,7 +14,7 @@
       <template v-slot:option="scope">
         <q-item v-bind="scope.itemProps">
           <q-item-section>
-            <q-item-label>{{ scope.opt.name }} - {{ scope.opt.amount }}</q-item-label>
+            <q-item-label>{{ scope.opt.name }}: {{ scope.opt.amount }}</q-item-label>
           </q-item-section>
         </q-item>
       </template>
@@ -39,7 +39,14 @@
     </div>
 
     <div class="q-mt-lg">
-      <q-btn label="Add" type="submit" color="primary" class="full-width" :disable="!formValid" />
+      <q-btn
+        label="Add"
+        type="submit"
+        color="primary"
+        class="full-width"
+        :disable="!formValid || isSubmitting"
+        :loading="isSubmitting"
+      />
     </div>
   </q-form>
 </template>
@@ -61,12 +68,15 @@ const form = ref({
 });
 const mustPay = ref<MustPayModel | null>(null);
 const options = computed(() => spreadSheetStore.listMustPay as MustPayModel[]);
+const isSubmitting = ref(false);
 
 const formValid = computed(() => {
   return form.value.day !== null && form.value.amount !== null && mustPay.value !== null;
 });
 
-const onSubmit = () => {
+const onSubmit = async () => {
+  if (isSubmitting.value) return;
+  isSubmitting.value = true;
   try {
     const requestModel: AddTransactionForMustPayRequestModel = {
       day: form.value.day.toString(),
@@ -79,12 +89,18 @@ const onSubmit = () => {
       },
     };
     console.log('request model', requestModel);
-    // const response = await spreadSheetStore.addTransaction(requestModel);
-    // console.log('response', response);
+    const response = await spreadSheetStore.addTransactionForMustPay(requestModel);
+    console.log('response', response);
     $q.notify({
       type: 'positive',
       message: 'Add transaction successfully!',
     });
+    form.value = {
+      day: new Date().getDate(),
+      amount: null,
+      isPayByCash: false,
+    };
+    mustPay.value = null;
   } catch (err: unknown) {
     const errorMessage =
       err instanceof Error
@@ -97,6 +113,8 @@ const onSubmit = () => {
       type: 'negative',
       message: errorMessage,
     });
+  } finally {
+    isSubmitting.value = false;
   }
 };
 </script>
