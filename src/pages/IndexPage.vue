@@ -18,7 +18,7 @@
           <div class="q-gutter-sm q-mb-sm">
             <q-radio v-model="radio" val="default" label="Default" />
             <q-radio v-model="radio" val="mustPay" label="For Must Pay" />
-            <q-radio v-model="radio" val="cashWithdrawal" label="Cash Withdrawal" />
+            <q-radio v-model="radio" val="cashWithdrawal" label="Cash Withdraw" />
           </div>
           <q-card v-if="radio === 'default'" class="q-pa-xs">
             <add-transaction></add-transaction>
