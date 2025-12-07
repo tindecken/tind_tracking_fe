@@ -27,6 +27,7 @@
                   'text-weight-bold': props.row.label === 'Per Day',
                   'text-primary': props.row.label === 'Per Day',
                   'text-h6': props.row.label === 'Per Day',
+                  'bg-light-green-2': props.row.label === 'Per Day',
                 },
               ]"
             >
