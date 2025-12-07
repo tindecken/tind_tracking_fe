@@ -11,6 +11,7 @@ import type { GetHoangRemainingResponse } from 'src/models/GetHoangRemainingResp
 import type { TransactionModel } from 'src/models/TransactionModel';
 import type { GetAllTransactionsResponse } from 'src/models/GetAllTransactionsResponse';
 import type { AddTransactionForMustPayRequestModel } from 'src/models/AddTransactionForMustPayRequestModel';
+import type { CashWithDrawalRequestModel } from 'src/models/CashWithDrawalRequestModel';
 
 export const useSpreadSheetStore = defineStore('spreadSheet', {
   state: () => {
@@ -97,6 +98,18 @@ export const useSpreadSheetStore = defineStore('spreadSheet', {
     ): Promise<GenericResponseData<any> | undefined> {
       try {
         const axiosResponse = await api.post('/spreadsheet/addTransactionForMustPay', model);
+        const responseData = (await axiosResponse.data) as GenericResponseData<any>;
+        console.log('responseData', responseData);
+        return responseData;
+      } catch (error: any) {
+        handleError(error);
+      }
+    },
+    async cashWithdrawal(
+      model: CashWithDrawalRequestModel,
+    ): Promise<GenericResponseData<any> | undefined> {
+      try {
+        const axiosResponse = await api.post('/spreadsheet/cashWithdrawal', model);
         const responseData = (await axiosResponse.data) as GenericResponseData<any>;
         console.log('responseData', responseData);
         return responseData;

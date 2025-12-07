@@ -18,12 +18,16 @@
           <div class="q-gutter-sm q-mb-sm">
             <q-radio v-model="radio" val="default" label="Default" />
             <q-radio v-model="radio" val="mustPay" label="For Must Pay" />
+            <q-radio v-model="radio" val="cashWithdrawal" label="Cash Withdrawal" />
           </div>
           <q-card v-if="radio === 'default'" class="q-pa-xs">
             <add-transaction></add-transaction>
           </q-card>
           <q-card v-if="radio === 'mustPay'" class="q-pa-xs">
             <add-transaction-for-mustpay></add-transaction-for-mustpay>
+          </q-card>
+          <q-card v-if="radio === 'cashWithdrawal'" class="q-pa-xs">
+            <cash-withdrawal></cash-withdrawal>
           </q-card>
         </q-tab-panel>
         <q-tab-panel name="transactions" class="q-pl-none q-pr-none">
@@ -40,6 +44,7 @@ import AddTransaction from 'src/components/AddTransaction.vue';
 import AddTransactionForMustpay from 'src/components/AddTransactionForMustpay.vue';
 import SummaryReport from 'src/components/SummaryReport.vue';
 import TransactionList from 'src/components/TransactionList.vue';
+import CashWithdrawal from 'src/components/CashWithdrawal.vue';
 
 const tab = ref('summary');
 const radio = ref('default');
