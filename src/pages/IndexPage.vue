@@ -31,7 +31,12 @@
           </q-card>
         </q-tab-panel>
         <q-tab-panel name="transactions" class="q-pl-none q-pr-none">
-          <transaction-list></transaction-list>
+          <div class="q-gutter-sm q-mb-sm">
+            <q-radio v-model="transactionType" val="default" label="Default" />
+            <q-radio v-model="transactionType" val="nhi" label="Nhi" />
+          </div>
+          <transaction-list v-if="transactionType === 'default'"></transaction-list>
+          <nhi-transaction-list v-else></nhi-transaction-list>
         </q-tab-panel>
       </q-tab-panels>
     </div>
@@ -44,8 +49,10 @@ import AddTransaction from 'src/components/AddTransaction.vue';
 import AddTransactionForMustpay from 'src/components/AddTransactionForMustpay.vue';
 import SummaryReport from 'src/components/SummaryReport.vue';
 import TransactionList from 'src/components/TransactionList.vue';
+import NhiTransactionList from 'src/components/NhiTransactionList.vue';
 import CashWithdrawal from 'src/components/CashWithdrawal.vue';
 
 const tab = ref('summary');
 const radio = ref('default');
+const transactionType = ref('default');
 </script>

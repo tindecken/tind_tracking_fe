@@ -20,7 +20,18 @@
             :class="{ 'bg-grey-2': props.rowIndex % 2 === 0, 'bg-white': props.rowIndex % 2 !== 0 }"
           >
             <q-td>{{ props.row.label }}</q-td>
-            <q-td class="text-right">{{ props.row.value }}</q-td>
+            <q-td
+              :class="[
+                'text-right',
+                {
+                  'text-weight-bold': props.row.label === 'Per Day',
+                  'text-primary': props.row.label === 'Per Day',
+                  'text-h6': props.row.label === 'Per Day',
+                },
+              ]"
+            >
+              {{ props.row.value }}
+            </q-td>
           </q-tr>
         </template>
       </q-table>

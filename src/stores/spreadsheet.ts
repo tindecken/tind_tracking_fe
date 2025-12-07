@@ -12,6 +12,7 @@ import type { TransactionModel } from 'src/models/TransactionModel';
 import type { GetAllTransactionsResponse } from 'src/models/GetAllTransactionsResponse';
 import type { AddTransactionForMustPayRequestModel } from 'src/models/AddTransactionForMustPayRequestModel';
 import type { CashWithDrawalRequestModel } from 'src/models/CashWithDrawalRequestModel';
+import type { GetNhiTransactionsResponse } from 'src/models/GetNhiTransactionsResponse';
 
 export const useSpreadSheetStore = defineStore('spreadSheet', {
   state: () => {
@@ -23,7 +24,12 @@ export const useSpreadSheetStore = defineStore('spreadSheet', {
       perDay: 0,
       listMustPay: [] as GetMustPayResponse,
       listTransactions: [] as TransactionModel[],
+      nhiTransactions: [] as {
+        name: string;
+        amount: number;
+      }[],
       totalTransactionAmount: 0,
+      totalNhiTransactionAmount: 0,
     };
   },
   getters: {},
@@ -143,6 +149,23 @@ export const useSpreadSheetStore = defineStore('spreadSheet', {
         this.$patch({
           listTransactions: responseData?.data?.transactions,
           totalTransactionAmount: responseData?.data?.total,
+        });
+        return responseData;
+      } catch (error: any) {
+        handleError(error);
+      }
+    },
+    async getNhiTransactions(): Promise<
+      GenericResponseData<GetNhiTransactionsResponse> | undefined
+    > {
+      try {
+        const axiosResponse = await api.get('/spreadsheet/getNhiTransactions');
+        const responseData =
+          (await axiosResponse.data) as GenericResponseData<GetNhiTransactionsResponse>;
+        console.log('responseData', responseData);
+        this.$patch({
+          nhiTransactions: responseData?.data?.transactions,
+          totalNhiTransactionAmount: responseData?.data?.total,
         });
         return responseData;
       } catch (error: any) {
