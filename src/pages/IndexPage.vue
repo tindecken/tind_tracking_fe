@@ -9,9 +9,7 @@
       <q-separator />
       <q-tab-panels v-model="tab" animated>
         <q-tab-panel name="summary" class="q-pl-none q-pr-none">
-          <q-card class="q-pa-xs">
-            <summary-report></summary-report>
-          </q-card>
+          <summary-report></summary-report>
         </q-tab-panel>
 
         <q-tab-panel name="addTransaction" class="q-pl-none q-pr-none">
