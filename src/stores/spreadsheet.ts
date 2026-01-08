@@ -13,6 +13,7 @@ import type { GetAllTransactionsResponse } from 'src/models/GetAllTransactionsRe
 import type { AddTransactionForMustPayRequestModel } from 'src/models/AddTransactionForMustPayRequestModel';
 import type { CashWithDrawalRequestModel } from 'src/models/CashWithDrawalRequestModel';
 import type { GetNhiTransactionsResponse } from 'src/models/GetNhiTransactionsResponse';
+import type { ReconcilliationRequestModel } from 'src/models/ReconcilliationRequestModel';
 
 export const useSpreadSheetStore = defineStore('spreadSheet', {
   state: () => {
@@ -116,6 +117,18 @@ export const useSpreadSheetStore = defineStore('spreadSheet', {
     ): Promise<GenericResponseData<any> | undefined> {
       try {
         const axiosResponse = await api.post('/spreadsheet/cashWithdrawal', model);
+        const responseData = (await axiosResponse.data) as GenericResponseData<any>;
+        console.log('responseData', responseData);
+        return responseData;
+      } catch (error: any) {
+        handleError(error);
+      }
+    },
+    async reconcilliation(
+      model: ReconcilliationRequestModel,
+    ): Promise<GenericResponseData<any> | undefined> {
+      try {
+        const axiosResponse = await api.post('/spreadsheet/reconcilliation', model);
         const responseData = (await axiosResponse.data) as GenericResponseData<any>;
         console.log('responseData', responseData);
         return responseData;
