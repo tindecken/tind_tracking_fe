@@ -28,7 +28,7 @@
 import { ref, computed } from 'vue';
 import { useSpreadSheetStore } from 'src/stores/spreadsheet';
 import { useQuasar } from 'quasar';
-import { GiveNhiRequestModel } from 'src/models/GiveNhiRequestModel';
+import type { GiveNhiRequestModel } from 'src/models/GiveNhiRequestModel';
 
 const $q = useQuasar();
 const spreadSheetStore = useSpreadSheetStore();

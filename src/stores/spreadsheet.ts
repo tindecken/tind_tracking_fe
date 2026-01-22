@@ -14,7 +14,7 @@ import type { AddTransactionForMustPayRequestModel } from 'src/models/AddTransac
 import type { CashWithDrawalRequestModel } from 'src/models/CashWithDrawalRequestModel';
 import type { GetNhiTransactionsResponse } from 'src/models/GetNhiTransactionsResponse';
 import type { ReconcilliationRequestModel } from 'src/models/ReconcilliationRequestModel';
-import { GiveNhiRequestModel } from 'src/models/GiveNhiRequestModel';
+import type { GiveNhiRequestModel } from 'src/models/GiveNhiRequestModel';
 
 export const useSpreadSheetStore = defineStore('spreadSheet', {
   state: () => {
