@@ -36,7 +36,7 @@ const form = ref({
   amount: null as number | null,
 });
 const fare = ref(1);
-const fareOptions = [1, 3];
+const fareOptions = [0, 1, 3];
 const isSubmitting = ref(false);
 
 const formValid = computed(() => {
