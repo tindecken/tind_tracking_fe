@@ -14,6 +14,7 @@ import type { AddTransactionForMustPayRequestModel } from 'src/models/AddTransac
 import type { CashWithDrawalRequestModel } from 'src/models/CashWithDrawalRequestModel';
 import type { GetNhiTransactionsResponse } from 'src/models/GetNhiTransactionsResponse';
 import type { ReconcilliationRequestModel } from 'src/models/ReconcilliationRequestModel';
+import { GiveNhiRequestModel } from 'src/models/GiveNhiRequestModel';
 
 export const useSpreadSheetStore = defineStore('spreadSheet', {
   state: () => {
@@ -180,6 +181,18 @@ export const useSpreadSheetStore = defineStore('spreadSheet', {
           nhiTransactions: responseData?.data?.transactions,
           totalNhiTransactionAmount: responseData?.data?.total,
         });
+        return responseData;
+      } catch (error: any) {
+        handleError(error);
+      }
+    },
+    async giveNhi(
+      model: GiveNhiRequestModel,
+    ): Promise<GenericResponseData<any> | undefined> {
+      try {
+        const axiosResponse = await api.post('/spreadsheet/giveNhi', model);
+        const responseData = (await axiosResponse.data) as GenericResponseData<any>;
+        console.log('giveNhi responseData', responseData);
         return responseData;
       } catch (error: any) {
         handleError(error);

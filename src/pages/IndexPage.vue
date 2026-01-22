@@ -18,6 +18,7 @@
             <q-radio v-model="radio" val="mustPay" label="For Must Pay" />
             <q-radio v-model="radio" val="cashWithdrawal" label="Withdraw" />
             <q-radio v-model="radio" val="reconcilliation" label="Reconcilliation" />
+            <q-radio v-model="radio" val="giveNhi" label="Give Nhi" />
           </div>
           <q-card v-if="radio === 'default'" class="q-pa-xs">
             <add-transaction></add-transaction>
@@ -30,6 +31,9 @@
           </q-card>
           <q-card v-if="radio === 'reconcilliation'" class="q-pa-xs">
             <reconcilliation></reconcilliation>
+          </q-card>
+          <q-card v-if="radio === 'giveNhi'" class="q-pa-xs">
+            <give-nhi></give-nhi>
           </q-card>
         </q-tab-panel>
         <q-tab-panel name="transactions" class="q-pl-none q-pr-none">
@@ -54,6 +58,7 @@ import TransactionList from 'src/components/TransactionList.vue';
 import NhiTransactionList from 'src/components/NhiTransactionList.vue';
 import CashWithdrawal from 'src/components/CashWithdrawal.vue';
 import Reconcilliation from 'src/components/Reconcilliation.vue';
+import GiveNhi from 'src/components/GiveNhi.vue';
 
 const tab = ref('summary');
 const radio = ref('default');
