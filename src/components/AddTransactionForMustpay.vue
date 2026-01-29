@@ -33,7 +33,7 @@
         <q-icon name="attach_money" />
       </template>
     </q-input>
-
+    <q-input v-model="form.note" label="Note" />
     <div class="q-mt-md">
       <q-checkbox v-model="form.isPayByCash" label="Pay By Cash" />
     </div>
@@ -64,6 +64,7 @@ const currentDate = new Date();
 const form = ref({
   day: currentDate.getDate(),
   amount: null as number | null,
+  note: '',
   isPayByCash: false,
 });
 const mustPay = ref<MustPayModel | null>(null);
@@ -82,6 +83,7 @@ const onSubmit = async () => {
       day: form.value.day.toString(),
       amount: Number(form.value.amount),
       isPaybyCash: form.value.isPayByCash,
+      note: form.value.note,
       mustPay: {
         name: mustPay.value!.name,
         amount: Number(mustPay.value!.amount),
@@ -98,6 +100,7 @@ const onSubmit = async () => {
     form.value = {
       day: new Date().getDate(),
       amount: null,
+      note: '',
       isPayByCash: false,
     };
     mustPay.value = null;
