@@ -49,6 +49,7 @@
         hide-header
         hide-no-data
         :rows-per-page-options="[0]"
+        style="width: 180px"
       >
         <template v-slot:body="props">
           <q-tr
